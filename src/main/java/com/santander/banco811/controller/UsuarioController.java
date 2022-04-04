@@ -5,6 +5,7 @@ import com.santander.banco811.dto.UsuarioResponse;
 import com.santander.banco811.model.Usuario;
 import com.santander.banco811.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,8 +20,8 @@ public class UsuarioController {
 
   @GetMapping
   @ResponseStatus(HttpStatus.OK)
-  public List<Usuario> getAll(@RequestParam(value = "nome", required = false) String nome) {
-    return usuarioService.getAll(nome);
+  public Page<Usuario> getAll(@RequestParam(value = "nome", required = false) String nome, @RequestParam(required = false, defaultValue = "0") int page, @RequestParam(required = false, defaultValue = "3") int size) {
+    return usuarioService.getAll(nome, page, size);
   }
 
   @PostMapping
