@@ -17,7 +17,7 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Integer> {
   Page<Usuario> findByNome(String nome, Pageable pageable);
 
   @Query("select new com.santander.banco811.dto.UsuarioResponse(u.id, u.cpf, u.nome, u.dataCriacao, u.dataAtualizacao) from Usuario u where u.cpf = :cpf")
-  List<UsuarioResponse> findByCpf(@Param("cpf") String cpf);
+  Page<UsuarioResponse> findByCpf(@Param("cpf") String cpf, Pageable pageable);
 
   List<Usuario> findByNomeAndCpf(String nome, String cpf);
 //  List<Usuario> findByCpf(String cpf);

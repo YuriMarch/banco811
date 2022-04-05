@@ -9,8 +9,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
 @RequestMapping("/usuario")
 public class UsuarioController {
@@ -22,6 +20,11 @@ public class UsuarioController {
   @ResponseStatus(HttpStatus.OK)
   public Page<Usuario> getAll(@RequestParam(value = "nome", required = false) String nome, @RequestParam(required = false, defaultValue = "0") int page, @RequestParam(required = false, defaultValue = "3") int size) {
     return usuarioService.getAll(nome, page, size);
+  }
+
+  @GetMapping("cpf")
+  public Page<UsuarioResponse> getAllByCpf(@RequestParam(value = "cpf", required = false) String cpf, @RequestParam(required = false, defaultValue = "0") int page, @RequestParam(required = false, defaultValue = "3") int size) {
+    return usuarioService.getAllByCpf(cpf, page, size);
   }
 
   @PostMapping

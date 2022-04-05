@@ -9,6 +9,9 @@ import java.util.List;
 
 public interface UsuarioService {
   Page<Usuario> getAll(String nome, int page, int size);
+
+  Page<UsuarioResponse> getAllByCpf(String cpf, int page, int size);
+
   UsuarioResponse create(UsuarioRequest usuarioRequest);
   Usuario getById(Integer id);
   Usuario update(UsuarioRequest usuarioRequest, Integer id);

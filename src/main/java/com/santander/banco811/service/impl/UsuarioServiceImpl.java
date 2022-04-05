@@ -11,8 +11,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 @Service
 public class UsuarioServiceImpl implements UsuarioService {
 
@@ -29,6 +27,14 @@ public class UsuarioServiceImpl implements UsuarioService {
     } else {
       return usuarioRepository.findAll(pageRequest);
     }
+  }
+
+  @Override
+  public Page<UsuarioResponse> getAllByCpf(String cpf, int page, int size) {
+
+    PageRequest pageRequest = PageRequest.of(page, size, Sort.Direction.ASC, "nome");
+
+    return usuarioRepository.findByCpf(cpf, pageRequest);
   }
 
   @Override

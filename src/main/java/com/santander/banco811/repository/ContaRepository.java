@@ -2,6 +2,7 @@ package com.santander.banco811.repository;
 
 import com.santander.banco811.model.Conta;
 import com.santander.banco811.model.TipoConta;
+import com.santander.banco811.projection.ContaView;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -32,4 +33,6 @@ public interface ContaRepository extends JpaRepository<Conta, Integer> {
           @Param("cpf") String cpf,
           @Param("saldo") BigDecimal saldo
   );
+
+  List<ContaView> findAllByTipoConta(TipoConta tipoConta);
 }
