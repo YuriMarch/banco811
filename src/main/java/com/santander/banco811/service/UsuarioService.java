@@ -16,4 +16,6 @@ public interface UsuarioService {
   Usuario getById(Integer id);
   Usuario update(UsuarioRequest usuarioRequest, Integer id);
   void delete(Integer id);
+
+  List<Usuario> search(String search);
 }

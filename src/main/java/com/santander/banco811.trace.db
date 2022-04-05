@@ -1,0 +1,3 @@
+2022-04-05 11:44:09 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "USUARIO" not found; SQL statement:
+select usuario0_.id as id1_1_, usuario0_.cpf as cpf2_1_, usuario0_.data_atualizacao as data_atu3_1_, usuario0_.data_criacao as data_cri4_1_, usuario0_.nome as nome5_1_, usuario0_.senha as senha6_1_ from usuario usuario0_ order by usuario0_.nome asc limit ? [42102-200]

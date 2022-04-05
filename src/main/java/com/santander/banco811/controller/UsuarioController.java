@@ -9,6 +9,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/usuario")
 public class UsuarioController {
@@ -49,5 +51,10 @@ public class UsuarioController {
   @ResponseStatus(HttpStatus.NO_CONTENT)
   public void delete(@PathVariable("id") Integer id) {
     usuarioService.delete(id);
+  }
+
+  @GetMapping("/search")
+  public List<Usuario> search(@RequestParam String search){
+    return usuarioService.search(search);
   }
 }
