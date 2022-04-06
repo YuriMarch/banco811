@@ -26,12 +26,17 @@ public class UsuarioController {
 
   @GetMapping
   @ResponseStatus(HttpStatus.OK)
-  public Page<Usuario> getAll(@RequestParam(value = "nome", required = false) String nome, @RequestParam(required = false, defaultValue = "0") int page, @RequestParam(required = false, defaultValue = "3") int size) {
+  public Page<Usuario> getAll(@RequestParam(value = "nome", required = false) String nome,
+                              @RequestParam(required = false, defaultValue = "0") int page,
+                              @RequestParam(required = false, defaultValue = "10") int size) {
     return usuarioService.getAll(nome, page, size);
   }
 
   @GetMapping("cpf")
-  public Page<UsuarioResponse> getAllByCpf(@RequestParam(value = "cpf", required = false) String cpf, @RequestParam(required = false, defaultValue = "0") int page, @RequestParam(required = false, defaultValue = "3") int size) {
+  @ResponseStatus(HttpStatus.OK)
+  public Page<UsuarioResponse> getAllByCpf(@RequestParam(value = "cpf", required = false) String cpf,
+                                           @RequestParam(required = false, defaultValue = "0") int page,
+                                           @RequestParam(required = false, defaultValue = "10") int size) {
     return usuarioService.getAllByCpf(cpf, page, size);
   }
 
@@ -60,11 +65,13 @@ public class UsuarioController {
   }
 
   @GetMapping("/search")
+  @ResponseStatus(HttpStatus.OK)
   public List<Usuario> search(@RequestParam String search){
     return usuarioService.search(search);
   }
 
   @GetMapping("/search/dsl")
+  @ResponseStatus(HttpStatus.OK)
   public Iterable<Usuario> searchDsl(@QuerydslPredicate(root = Usuario.class) Predicate predicate){
     return usuarioRepository.findAll();
   }
