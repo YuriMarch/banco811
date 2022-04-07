@@ -21,8 +21,8 @@ public class ContaServiceImpl implements ContaService {
   @Autowired
   ContaRepository contaRepository;
 
-//  @Autowired
-//  UsuarioRepository usuarioRepository;
+  @Autowired
+  UsuarioRepository usuarioRepository;
 //
 //  @Autowired
 //  UsuarioService usuarioService;
@@ -32,6 +32,16 @@ public class ContaServiceImpl implements ContaService {
     return contaRepository.findAllByTipoConta(tipoConta);
   }
 
+  @Override
+  public Conta create(ContaRequest contaRequest, String username) {
+    var usuario = usuarioRepository.findByLogin(username);
+
+    Conta conta = new Conta();
+    conta.setUsuario(usuario.get());
+    conta.setTipoConta(contaRequest.getTipoConta());
+
+    return contaRepository.save(conta);
+  }
 //  @Override
 //  public ContaResponse create(ContaRequest contaRequest, Integer usuarioId) {
 //

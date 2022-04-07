@@ -29,11 +29,16 @@ public class Usuario {
   @Column(name = "cpf", nullable = false, unique = true)
   private String cpf;
 
+  @JsonProperty("password")
   @Column(name = "senha")
   private String senha;
 
   @Column(name = "nome")
   private String nome;
+
+  @JsonProperty("username")
+  @Column(name = "login")
+  private String login;
 
   @Column(name = "data_criacao")
   @CreatedDate
@@ -47,9 +52,10 @@ public class Usuario {
   @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
   private List<Conta> contas;
 
-  public Usuario(UsuarioRequest usuarioRequest) {
+  public Usuario(UsuarioRequest usuarioRequest, String encryptedPassword) {
     this.cpf = usuarioRequest.getCpf();
     this.nome = usuarioRequest.getNome();
-    this.senha = usuarioRequest.getSenha();
+    this.senha = encryptedPassword;
+    this.login = usuarioRequest.getLogin();
   }
 }
