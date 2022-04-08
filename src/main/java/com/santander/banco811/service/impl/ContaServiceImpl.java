@@ -23,9 +23,6 @@ public class ContaServiceImpl implements ContaService {
 
   @Autowired
   UsuarioRepository usuarioRepository;
-//
-//  @Autowired
-//  UsuarioService usuarioService;
 
   @Override
   public List<ContaView> getAllViewByTipoConta(TipoConta tipoConta) {
@@ -39,6 +36,8 @@ public class ContaServiceImpl implements ContaService {
     Conta conta = new Conta();
     conta.setUsuario(usuario.get());
     conta.setTipoConta(contaRequest.getTipoConta());
+    conta.setAgencia(contaRequest.getAgencia());
+    conta.setNumero(contaRequest.getNumero());
 
     return contaRepository.save(conta);
   }

@@ -23,28 +23,29 @@ public class JWTValidateFilter extends BasicAuthenticationFilter {
   }
 
   @Override
-  protected void doFilterInternal(HttpServletRequest request,
-                                  HttpServletResponse response,
-                                  FilterChain chain)
-          throws IOException, ServletException {
-    var authorizationToken = request.getHeader(AUTHORIZATION);
+  protected void doFilterInternal(
+          HttpServletRequest request,
+          HttpServletResponse response,
+          FilterChain chain
+  ) throws IOException, ServletException {
+      var authorizationToken = request.getHeader(AUTHORIZATION);
 
-    if (authorizationToken == null){
+      if (authorizationToken == null){
+        chain.doFilter(request, response);
+        return;
+      }
+
+      if (!authorizationToken.startsWith(TOKEN_PREFIX)){
+        chain.doFilter(request, response);
+        return;
+      }
+
+      var token = authorizationToken.replace(TOKEN_PREFIX, "");
+
+      var authenticationToken = getAuthenticationToken(token);
+
+      SecurityContextHolder.getContext().setAuthentication(authenticationToken);
       chain.doFilter(request, response);
-      return;
-    }
-
-    if (!authorizationToken.startsWith(TOKEN_PREFIX)){
-      chain.doFilter(request, response);
-      return;
-    }
-
-    var token = authorizationToken.replace(TOKEN_PREFIX, "");
-
-    var authenticationToken = getAuthenticationToken(token);
-
-    SecurityContextHolder.getContext().setAuthentication(authenticationToken);
-    chain.doFilter(request, response);
   }
 
   public UsernamePasswordAuthenticationToken getAuthenticationToken(String token) {

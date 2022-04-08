@@ -19,7 +19,7 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-  private final UserDetailsService userDetailsService;
+  private final UserDetailsServiceImpl userService;
 
   public SecurityConfig(UserDetailsServiceImpl userService) {
     this.userService = userService;
@@ -32,8 +32,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
   @Override
   protected void configure(HttpSecurity http) throws Exception {
+
+    //Permissões de acesso
+
     http.csrf().disable().authorizeRequests()
             .antMatchers(HttpMethod.POST, "/usuario").permitAll()
+            .antMatchers(HttpMethod.GET, "/usuario").permitAll()
+            .antMatchers(HttpMethod.GET, "/usuario/{id}").permitAll()
+            .antMatchers(HttpMethod.DELETE, "/usuario/{id}").permitAll()
+            .antMatchers(HttpMethod.PUT, "/usuario/{id}").permitAll()
+            .antMatchers(HttpMethod.PUT, "/usuario/{cpf}").permitAll()
+            .antMatchers(HttpMethod.GET, "/health-check").permitAll()
+            .antMatchers(HttpMethod.GET, "/conta").permitAll()
+            .antMatchers(HttpMethod.GET, "/conta/view").permitAll()
             .anyRequest().authenticated().and()
             .addFilter(new JWTAuthenticateFilter(authenticationManager()))
             .addFilter(new JWTValidateFilter(authenticationManager()))

@@ -19,8 +19,8 @@ public class UserFilter extends OncePerRequestFilter {
   protected void doFilterInternal(
           HttpServletRequest request,
           HttpServletResponse response,
-          FilterChain filterChain)
-          throws ServletException, IOException {
+          FilterChain filterChain
+  ) throws ServletException, IOException {
     var authentication = SecurityContextHolder.getContext().getAuthentication();
     var username = authentication.getPrincipal();
 

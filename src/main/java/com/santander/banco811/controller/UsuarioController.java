@@ -8,6 +8,7 @@ import com.santander.banco811.repository.UsuarioRepository;
 import com.santander.banco811.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.querydsl.binding.QuerydslPredicate;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -73,6 +74,6 @@ public class UsuarioController {
   @GetMapping("/search/dsl")
   @ResponseStatus(HttpStatus.OK)
   public Iterable<Usuario> searchDsl(@QuerydslPredicate(root = Usuario.class) Predicate predicate){
-    return usuarioRepository.findAll();
+    return usuarioRepository.findAll((Pageable) predicate);
   }
 }

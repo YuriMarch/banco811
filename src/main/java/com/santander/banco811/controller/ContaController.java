@@ -29,21 +29,12 @@ public class ContaController {
 
   @PostMapping
   public Conta create(@RequestBody ContaRequest contaRequest) {
-    var username = RequestContextHolder.getRequestAttributes().getAttributes(USERNAME,
-                    RequestAttributes.SCOPE_SESSION)
+    var username = RequestContextHolder.getRequestAttributes()
+            .getAttribute(USERNAME, RequestAttributes.SCOPE_SESSION)
             .toString();
 
     return contaService.create(contaRequest, username);
   }
 
   private static final String USERNAME = "USERNAME";
-
-//  @PostMapping(value = "/{usuarioId}",
-//          consumes = MediaType.APPLICATION_JSON_VALUE,
-//          produces = MediaType.APPLICATION_JSON_VALUE
-//  )
-//  @ResponseStatus(HttpStatus.CREATED)
-//  public ContaResponse create(@RequestBody ContaRequest contaRequest, @PathVariable("usuarioId") Integer usuarioId) {
-//    return contaService.create(contaRequest, usuarioId);
-//  }
 }
