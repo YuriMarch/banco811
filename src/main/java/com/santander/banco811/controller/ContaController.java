@@ -6,7 +6,9 @@ import com.santander.banco811.model.Conta;
 import com.santander.banco811.model.TipoConta;
 import com.santander.banco811.projection.ContaView;
 import com.santander.banco811.service.ContaService;
+import com.santander.banco811.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -22,18 +24,28 @@ public class ContaController {
   @Autowired
   ContaService contaService;
 
+  @GetMapping
+  @ResponseStatus(HttpStatus.OK)
+  public Page<Conta> getAll(@RequestParam(required = false) String nome,
+                            @RequestParam(required = false, defaultValue = "0") int page,
+                            @RequestParam(required = false, defaultValue = "10") int size) {
+    return contaService.getAll(nome, page, size);
+  }
+
   @GetMapping("/view")
   public List<ContaView> getAllContaViewByTipoConta(@RequestParam TipoConta tipoConta) {
     return contaService.getAllViewByTipoConta(tipoConta);
   }
 
   @PostMapping
-  public Conta create(@RequestBody ContaRequest contaRequest) {
-    var username = RequestContextHolder.getRequestAttributes()
-            .getAttribute(USERNAME, RequestAttributes.SCOPE_SESSION)
-            .toString();
+  public Conta create(@RequestBody ContaRequest contaRequest, @RequestParam(required = true) Integer userId) {
+    return contaService.create(contaRequest, userId);
+  }
 
-    return contaService.create(contaRequest, username);
+  @DeleteMapping("/{id}")
+  @ResponseStatus(HttpStatus.NO_CONTENT)
+  public void delete(@PathVariable("id") Integer id) {
+    contaService.delete(id);
   }
 
   private static final String USERNAME = "USERNAME";

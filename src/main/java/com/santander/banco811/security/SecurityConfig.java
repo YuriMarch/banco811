@@ -44,6 +44,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .antMatchers(HttpMethod.PUT, "/usuario/{cpf}").permitAll()
             .antMatchers(HttpMethod.GET, "/health-check").permitAll()
             .antMatchers(HttpMethod.GET, "/conta").permitAll()
+            .antMatchers(HttpMethod.POST, "/conta").permitAll()
             .antMatchers(HttpMethod.GET, "/conta/view").permitAll()
             .anyRequest().authenticated().and()
             .addFilter(new JWTAuthenticateFilter(authenticationManager()))

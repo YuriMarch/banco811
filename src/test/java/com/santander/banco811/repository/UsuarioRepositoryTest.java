@@ -36,6 +36,7 @@ public class UsuarioRepositoryTest {
     usuario.setSenha("1234567");
     usuario.setCpf("12345678910");
 
+
     Usuario usuario2 = new Usuario();
     usuario2.setNome("Maria");
     usuario2.setSenha("7654321");

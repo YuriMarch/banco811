@@ -11,6 +11,9 @@ import com.santander.banco811.repository.UsuarioRepository;
 import com.santander.banco811.service.ContaService;
 import com.santander.banco811.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -24,23 +27,45 @@ public class ContaServiceImpl implements ContaService {
   @Autowired
   UsuarioRepository usuarioRepository;
 
+  @Autowired
+  UsuarioService usuarioService;
+
   @Override
   public List<ContaView> getAllViewByTipoConta(TipoConta tipoConta) {
     return contaRepository.findAllByTipoConta(tipoConta);
   }
 
   @Override
-  public Conta create(ContaRequest contaRequest, String username) {
-    var usuario = usuarioRepository.findByLogin(username);
+  public Conta create(ContaRequest contaRequest, Integer userId) {
+    var usuario = usuarioRepository.findById(userId);
 
     Conta conta = new Conta();
-    conta.setUsuario(usuario.get());
     conta.setTipoConta(contaRequest.getTipoConta());
     conta.setAgencia(contaRequest.getAgencia());
     conta.setNumero(contaRequest.getNumero());
+    conta.setUsuario(usuario.get());
 
     return contaRepository.save(conta);
   }
+
+  @Override
+  public Page<Conta> getAll(String nome, int page, int size) {
+
+    PageRequest pageRequest = PageRequest.of(page, size, Sort.Direction.ASC, "nome");
+
+    if (nome != null) {
+      return contaRepository.findByUsuario_nome(nome, pageRequest);
+    } else {
+      return contaRepository.findAll(pageRequest);
+    }
+  }
+
+  @Override
+  public void delete(Integer id) {
+    var conta = contaRepository.findById(id).orElseThrow();
+    contaRepository.delete(conta);
+  }
+
 //  @Override
 //  public ContaResponse create(ContaRequest contaRequest, Integer usuarioId) {
 //
