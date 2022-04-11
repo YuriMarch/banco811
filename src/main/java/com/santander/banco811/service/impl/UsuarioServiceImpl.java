@@ -67,6 +67,7 @@ public class UsuarioServiceImpl implements UsuarioService {
     usuario.setNome(usuarioRequest.getNome());
     usuario.setCpf(usuarioRequest.getCpf());
     usuario.setSenha(usuarioRequest.getSenha());
+    usuario.setLogin(usuarioRequest.getLogin());
 
     return usuarioRepository.save(usuario);
   }

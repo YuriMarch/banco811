@@ -28,7 +28,6 @@ public class UserFilter extends OncePerRequestFilter {
 
     filterChain.doFilter(request, response);
 
-    return;
   }
 
   public static final String USERNAME = "USERNAME";
