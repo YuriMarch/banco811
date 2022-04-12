@@ -66,6 +66,11 @@ public class ContaServiceImpl implements ContaService {
     contaRepository.delete(conta);
   }
 
+  @Override
+  public List<Conta> getAll() {
+    return contaRepository.findAll();
+  }
+
 //  @Override
 //  public ContaResponse create(ContaRequest contaRequest, Integer usuarioId) {
 //

@@ -18,5 +18,7 @@ public interface ContaService {
 //  Page<Conta> getAll(String nome, int page, int size);
 
   void delete(Integer id);
+
+  List<Conta> getAll();
 }
 

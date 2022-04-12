@@ -24,6 +24,11 @@ public class ContaController {
   @Autowired
   ContaService contaService;
 
+  @GetMapping
+  public List<Conta> getAll() {
+    return contaService.getAll();
+  }
+
 //  @GetMapping
 //  @ResponseStatus(HttpStatus.OK)
 //  public Page<Conta> getAll(@RequestParam(required = false) String nome,
