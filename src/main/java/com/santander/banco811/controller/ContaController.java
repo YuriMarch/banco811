@@ -24,13 +24,13 @@ public class ContaController {
   @Autowired
   ContaService contaService;
 
-  @GetMapping
-  @ResponseStatus(HttpStatus.OK)
-  public Page<Conta> getAll(@RequestParam(required = false) String nome,
-                            @RequestParam(required = false, defaultValue = "0") int page,
-                            @RequestParam(required = false, defaultValue = "10") int size) {
-    return contaService.getAll(nome, page, size);
-  }
+//  @GetMapping
+//  @ResponseStatus(HttpStatus.OK)
+//  public Page<Conta> getAll(@RequestParam(required = false) String nome,
+//                            @RequestParam(required = false, defaultValue = "0") int page,
+//                            @RequestParam(required = false, defaultValue = "10") int size) {
+//    return contaService.getAll(nome, page, size);
+//  }
 
   @GetMapping("/view")
   public List<ContaView> getAllContaViewByTipoConta(@RequestParam TipoConta tipoConta) {

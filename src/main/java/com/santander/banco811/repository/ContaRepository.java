@@ -41,7 +41,7 @@ public interface ContaRepository extends JpaRepository<Conta, Integer> {
 
   Page<Conta> findByNumero(Integer numero, Pageable pageable);
 
-  Page<Conta> getAll(PageRequest pageRequest);
+//  Page<Conta> getAll(PageRequest pageRequest);
 
   Page<Conta> findByUsuario_nome(String nome, Pageable pageable);
 }

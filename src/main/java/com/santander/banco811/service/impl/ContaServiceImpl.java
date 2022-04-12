@@ -48,17 +48,17 @@ public class ContaServiceImpl implements ContaService {
     return contaRepository.save(conta);
   }
 
-  @Override
-  public Page<Conta> getAll(String nome, int page, int size) {
-
-    PageRequest pageRequest = PageRequest.of(page, size, Sort.Direction.ASC, "nome");
-
-    if (nome != null) {
-      return contaRepository.findByUsuario_nome(nome, pageRequest);
-    } else {
-      return contaRepository.findAll(pageRequest);
-    }
-  }
+//  @Override
+//  public Page<Conta> getAll(String nome, int page, int size) {
+//
+//    PageRequest pageRequest = PageRequest.of(page, size, Sort.Direction.ASC, "nome");
+//
+//    if (nome != null) {
+//      return contaRepository.findByUsuario_nome(nome, pageRequest);
+//    } else {
+//      return contaRepository.findAll(pageRequest);
+//    }
+//  }
 
   @Override
   public void delete(Integer id) {

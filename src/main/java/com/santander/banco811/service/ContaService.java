@@ -15,7 +15,7 @@ public interface ContaService {
 
   Conta create(ContaRequest contaRequest, Integer userId);
 
-  Page<Conta> getAll(String nome, int page, int size);
+//  Page<Conta> getAll(String nome, int page, int size);
 
   void delete(Integer id);
 }
